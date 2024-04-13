@@ -1,0 +1,31 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "iwinfo"
+dynamic = ["version"]
+description = "iwinfo : Provides information about wireless network(s)"
+authors = [{ name = "Gene C", email = "arch@sapience.com" }]
+license = "MIT"
+readme = "README.rst"
+keywords = []
+classifiers = [ 
+    "Development Status :: 5 - Production/Stable",
+    "Programming Language :: Python",
+    "Programming Language :: C",
+    "Programming Language :: Python :: 3.11",
+]
+dependencies = []
+
+[project.urls]
+#Documentation = "https://github.com/gene-git/iwinfo/Docs"
+#Issues = "https://github.com/gene-git/iwinfo/issues"
+#Source = "https://github.com/gene-git/iwinfo"
+
+[tool.hatch.version]
+path = "src/iwinfo/__about__.py"
+
+[[tool.hatch.envs.all.matrix]]
+python = ["3.10", "3.11", "3.12"]
+

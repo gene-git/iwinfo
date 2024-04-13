@@ -1,0 +1,32 @@
+#
+# Router Info Database for local network
+#
+# TOML format 1 section per router
+#
+# Info is any text like location
+# Only care about lan side not wan side (AP not router)
+# Call the MAC items anything you want.
+#
+# [ap1]
+#     ip = 'xxx.xxx.xxx.xxx'
+#     mac_map = [ ['chanel_name', ''x:x:x:x:x:x'],
+#                 'chanel_name', ''x:x:x:x:x:x'], ... ]
+#     model = 'Netgear'
+#     info = 'location or other useful stuff'
+#
+# NB 
+#    - MAC addresses must be in canonical format 'aa:bb:cc:dd:ee:ff' (using colons)
+#    - sometimes mac may be used on more than 1 interface (lan and wifi)
+#    - channel_name is any text you find useful.
+# section names and left hand side 'keys' must start with letter and contain no periods
+#
+
+[ap0]
+    ip = '10.0.0.10'
+    mac_map = [['5GHz', 'x:x:x:x:x:x'],
+               ['24Ghz', 'x:x:x:x:x:x'],
+               ['lan', 'x:x:x:x:x:x'],
+              ]
+    model = 'Netgear R7800'
+    info = 'Main Office'
+        
