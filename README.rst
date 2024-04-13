@@ -44,35 +44,31 @@ New / Interesting
 Getting Started
 ###############
 
- * Run *iwinfo* or *iwinfo -ns*
-
-
-iwinfo application
-==================
-
 Usage
------
+=====
 
-Run it from a terminal:
+Run in a terminal :
 
  .. code-block:: bash
 
-   iwinfo --help
-
+    iwinfo --help
+    iwinfo
+    iwinfo --scan
 
 Configuration
--------------
+=============
 
-The optional configuration file for iwinfo is ... 
+An optional configuration file for iwinfo goes in:
 
  .. code-block:: bash
 
    /etc/iwinfo/wifi.db
 
-The file is a way to provide additional information about wireless devices on the netwwork.
-It is in *toml* format and a sample file is */etc/iwinfo/wifi.db.sample*.
+*wifi.db* allows you to provide additional information about known wireless devices on the netwwork.
+File is in *toml* format and a sample is installed in */etc/iwinfo/wifi.db.sample*. If available, 
+then this information is used in generating the reports.
 
-Each device in the file has an entry of the form::
+Each device listed in the file should have an entry of the form::
 
     [ap0]
         ip = '10.0.0.10'
@@ -83,7 +79,7 @@ Each device in the file has an entry of the form::
         model = 'Netgear R9000'
         info = 'Location Office 1'
 
-The mac_map is a list of pairs of [key, mac-address]. Each key can be any convenient string.
+The mac_map is a list of pairs of [key, mac-address]. The key can be any convenient string you choose.
 
 .. iwinfo-opts:
 
