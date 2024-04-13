@@ -75,9 +75,7 @@ The optional configuration file for iwinfo is ...
 The file is a way to provide additional information about wireless devices on the netwwork.
 It is in *toml* format and a sample file is */etc/iwinfo/wifi.db.sample*.
 
-Each device in the file has an entry of the form:
-
- .. code-block:: bash
+Each device in the file has an entry of the form::
 
     [ap0]
         ip = '10.0.0.10'
