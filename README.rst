@@ -18,13 +18,10 @@ Scanning wireless networks requires elevated privileges, which means either by r
 root or by being provided with the required cap_net_xxx capablilities. 
 
 This package provides the application, written in python, along with a small
-C-program which is installed with cap_net_raw and cap_net_admin
+C-program which is installed with cap_net_raw and cap_net_admin [#]_ 
 and it provides the capabilities for the program to be run non-root.
-
-The applicion, *iwinfo*, sets the ambient capabilities [#]_ needed
-by the application and then runs it. The capabilities required
-are cap_net_raw and cap_net_admin. Since this does add some risk, it is limited
-to root and *wheel* group members only.
+Since this does add some risk, scanning is limited to root and members
+of the *wheel* group only.
 
 Others will still be able to get local wireless device and connection info, but will
 not be able to scan the network(s).
@@ -122,7 +119,7 @@ With --scan::
     wlan0:
     xx:xx:xx:xx:xx:xx:  MagicalPlaces-24     2432.0   -32.00 dBm : Netgear 9000  Office 1
   * xx:xx:xx:xx:xx:xx:  MagicalPlaces        5745.0   -49.00 dBm : Netgear 9000  Office 1
-    yy:yy:yy:yy:yy:yy:  MyNeighbor-24        5955.0   -55.00 dBm : Asus GT11000  Test Lab
+    yy:yy:yy:yy:yy:yy:  MyNeighbor-6G        5955.0   -55.00 dBm : Asus GT11000  Test Lab
     ...
 
 The asterisk indicates machine is currently connecte to that AP
