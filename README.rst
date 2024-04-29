@@ -118,7 +118,7 @@ With --scan::
     yy:yy:yy:yy:yy:yy:  MyNeighbor-6G        5955.0   -55.00 dBm : Asus GT11000  Test Lab
     ...
 
-The asterisk indicates machine is currently connecte to that AP
+The asterisk indicates machine is currently connected to that AP
 
 
 ########
@@ -129,8 +129,9 @@ Note on CET Shadow Stack
 ========================
 
 The code is compiled with this turned on. If for some reason you get an error compiling then
-you may turn it off by changing the load flag to 'cet-report=warning'. This may happen
-if you have old glibc (pre 2.39)
+you may turn it off by changing the load flag to 'cet-report=warning' in *src/ambient/Makefile*.
+
+This may happen if you have old glibc (pre 2.39).
 
 
 Installation
