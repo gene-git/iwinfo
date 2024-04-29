@@ -1,6 +1,12 @@
 Changelog
 =========
 
+**[2.0.5] ----- 2024-04-29** ::
+
+	    Improve pulling Changelog for pacman -Qc
+	    update Docs/Changelog.rst Docs/iwinfo.pdf
+
+
 **[2.0.4] ----- 2024-04-13** ::
 
 	    improve readme
