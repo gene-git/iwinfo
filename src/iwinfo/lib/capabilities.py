@@ -6,7 +6,7 @@ Check for cap_net_raw, cap_net_admin
 import os
 from ctypes import CDLL
 from ctypes.util import find_library
-import prctl
+#import prctl
 from .utils import open_file
 
 def _get_net_capabilities():
@@ -41,13 +41,13 @@ def _get_net_capabilities():
         caps = def_caps
     return caps
 
-def _have_net_caps_prctl():
-    """
-     - use python-prctl module. Simple and clean.
-    """
-    # pylint: disable=no-member
-    has_caps = prctl.cap_inheritable.net_raw and prctl.cap_inheritable.net_admin
-    return has_caps
+#def _have_net_caps_prctl():
+#    """
+#     - use python-prctl module.
+#    """
+#    # pylint: disable=no-member
+#    has_caps = prctl.cap_inheritable.net_raw and prctl.cap_inheritable.net_admin
+#    return has_caps
 
 def _have_net_caps_libcap():
     """
@@ -77,18 +77,19 @@ def have_net_caps():
     """
     check for net caps we need for iw
     Couple ways to do this.
-     - use python-prctl module. Simple and clean.
+     - use python-prctl module.
      - call libcap directly
-       We will do this to reduce reliance on python packages
+       We call libcap to reduce reliance on python packages
     """
-    # root generally ok
+    # root ok
     is_root = bool(os.geteuid() == 0)
     if is_root:
         return is_root
 
     #
     # Pick one approach
-    #have_caps = _have_net_caps_prctl()
+    # have_caps = _have_net_caps_prctl()
+    #
     have_caps = _have_net_caps_libcap()
 
     return have_caps
