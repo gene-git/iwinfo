@@ -1,6 +1,12 @@
 Changelog
 =========
 
+**[2.1.0] ----- 2024-05-04** ::
+
+	    We handle capabilities directly so drop all refs to prctl since its not used. Remove it from PKGBUILD as well
+	    update Docs/Changelog.rst Docs/iwinfo.pdf
+
+
 **[2.0.6] ----- 2024-04-30** ::
 
 	    Take Changelog "hack" out of PKGBUILD ... was a bad idea
