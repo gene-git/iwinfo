@@ -1,6 +1,12 @@
 Changelog
 =========
 
+**[2.2.0] ----- 2024-05-04** ::
+
+	    libcap-ng versions >= 0.6 provide python binding. We now use it instad of using our own calls to c-library libcap-ng.so
+	    update Docs/Changelog.rst Docs/iwinfo.pdf
+
+
 **[2.1.0] ----- 2024-05-04** ::
 
 	    We handle capabilities directly so drop all refs to prctl since its not used. Remove it from PKGBUILD as well
