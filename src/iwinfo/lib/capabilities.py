@@ -4,74 +4,34 @@
 Check for cap_net_raw, cap_net_admin
 """
 import os
-from ctypes import CDLL
-from ctypes.util import find_library
-#import prctl
-from .utils import open_file
+import capng
 
-def _get_net_capabilities():
+def _check_have_net_caps():
     """
-    Gets the integer values of the capabilities we need
-    from capabilities.h header file
+    libcap_ng version >= 0.6 provides python bindings to libcap_nd
+    In addition, versions >= 0.8.3 provide drop ambient
     """
-    need = ['CAP_NET_ADMIN', 'CAP_NET_RAW']
-    num_caps = len(need)
+    #
+    # Check have ambient caps
+    #  - ambient is required to run programs for network scan (e.g. iw)
+    #
+    if not capng.capng_have_capabilities(capng.CAPNG_SELECT_AMBIENT) > capng.CAPNG_NONE:
+        return False
 
-    # in case we cannot find the defines
-    def_caps = {'CAP_NET_ADMIN': 12, 'CAP_NET_RAW': 13}
-
-    cap_file = '/usr/include/sys/capability.h'
-    done = False
-    caps = {}
-    fob = open_file(cap_file, 'r')
-    if fob:
-        data = fob.read()
-        fob.close()
-        rows = data.splitlines()
-        for row in rows:
-            for cap in need:
-                if cap in row:
-                    caps[cap] = row.split(cap)[-1].strip()
-                    if len(caps) == num_caps:
-                        done = True
-                        break
-            if done:
-                break
-    if not done:
-        caps = def_caps
-    return caps
-
-#def _have_net_caps_prctl():
-#    """
-#     - use python-prctl module.
-#    """
-#    # pylint: disable=no-member
-#    has_caps = prctl.cap_inheritable.net_raw and prctl.cap_inheritable.net_admin
-#    return has_caps
-
-def _have_net_caps_libcap():
-    """
-     - use libcap shared library directly.
-    """
-    have_caps = False
-    libcap = CDLL(find_library('cap'))
-
-    # get the list of cap names and integer constants
-    caps = _get_net_capabilities()
-
-    # check we have them all
-    num_caps = len(caps)
+    #
+    # Check have the network ones we need
+    #
+    need = [capng.CAP_NET_ADMIN, capng.CAP_NET_RAW]
+    num_need = len(need)
     num_have = 0
-    for (_cap, cap_val) in caps.items():
-        check = libcap.cap_get_ambient(cap_val)
-        if check > 0:
+    which = capng.CAPNG_AMBIENT
+    for cap in need:
+        if capng.capng_have_capability(which, cap):
             num_have += 1
 
-    if num_have == num_caps:
-        have_caps = True
-
-    return have_caps
-
+    if num_have == num_need:
+        return True
+    return False
 
 def have_net_caps():
     """
@@ -87,9 +47,8 @@ def have_net_caps():
         return is_root
 
     #
-    # Pick one approach
-    # have_caps = _have_net_caps_prctl()
+    # check have needed caps
     #
-    have_caps = _have_net_caps_libcap()
+    have_caps = _check_have_net_caps()
 
     return have_caps
