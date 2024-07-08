@@ -13,20 +13,19 @@ def parse_iw_scan(iw_output:[str], iwscan:'IwScanDevice') -> None:
     """
     keys = ['SSID', 'freq', 'signal']
 
+    scan_item = None
     for raw_row in iw_output:
         row = raw_row.strip()
         #print(f'xxx:{row}')
 
         bssid = found_access_point(raw_row)
-        scan_item = None
         if bssid:
             # AP line
             scan_item = iwscan.add_item(bssid)
-
-        if not scan_item:
             continue
 
-        row_split = row.split(':', 1)
+        #row_split = row.split(':', 1)
+        row_split = row.split(' ', 1)
         for key in keys:
             #if key in row_split[0]:
             if row_split[0].startswith(key):

@@ -6,7 +6,7 @@ Deals with scanning wifi
 from .run_prog import run_prog
 from .parse_iw_scan import parse_iw_scan
 
-def get_iw_scan(dev:str, iwscan:'IwScan'):
+def get_iw_scan(dev:str, iwscan:'IwScanDevice'):
     """
     Use iw scan to get info from this device
     Requres priv capabilites - see class_iw for more info

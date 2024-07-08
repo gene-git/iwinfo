@@ -135,6 +135,12 @@ class IwScanDevice:
         #scan_items = sorted(self.scan_items, key=lambda x: (x.freq, x.signal))
         scan_items = self.scan_items
         if scan_items and len(scan_items) > 1:
+            #for item in self.scan_items:
+            #    if item.freq:
+            #        item.freq = x.freq.strip()
+            #    else:
+            #        item.freq = '-'
+
             scan_items = sorted(self.scan_items, key=lambda x: (x.freq.strip()[0], x.signal))
         if not scan_items:
             scan_items = []
