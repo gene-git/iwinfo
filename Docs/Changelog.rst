@@ -1,6 +1,12 @@
 Changelog
 =========
 
+**[2.3.0] ----- 2024-07-07** ::
+
+	    Scan report sort firt by band and then by signal instead of just signal
+	    update Docs/Changelog.rst Docs/iwinfo.pdf
+
+
 **[2.2.0] ----- 2024-05-04** ::
 
 	    libcap-ng versions >= 0.6 provide python binding. We now use it instad of using our own calls to c-library libcap-ng.so
