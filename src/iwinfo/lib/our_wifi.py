@@ -91,10 +91,12 @@ def _runit(pargs:[str]) -> [str]:
     """
     Runs pargs and returns output lines or None if failed
     """
+    result = None
     [ret, out, err] = run_prog(pargs)
     if ret != 0:
         if err:
             print(err)
         return None
-    result = out.splitlines()
+    if out:
+        result = out.splitlines()
     return result
