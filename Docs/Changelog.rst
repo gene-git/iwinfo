@@ -1,6 +1,12 @@
 Changelog
 =========
 
+**[2.8.0] ----- 2024-07-08** ::
+
+	    Add IP address to report
+	    update Docs/Changelog.rst Docs/iwinfo.pdf
+
+
 **[2.7.0] ----- 2024-07-08** ::
 
 	    Ensure works even if no active wifi settings
