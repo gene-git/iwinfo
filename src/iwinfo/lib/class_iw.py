@@ -30,7 +30,7 @@ def _rpt_db_more_info(bssid, wifi_db):
     if wifi_db:
         (model, info) = wifi_db.get_dev_info(bssid)
         if model:
-            more_info = f'{model} '
+            more_info = f'{model:^18s} '
         if info:
             more_info += info
     return more_info
@@ -89,6 +89,10 @@ class IwOurs:
             print(f'{"txmode":>15s} : {self.txmode}')
         if self.rxmode:
             print(f'{"rxmode":>15s} : {self.rxmode}')
+        if self.ipv4_address:
+            print(f'{"ipv4_address":>15s} : {self.ipv4_address}')
+        if self.ipv6_address:
+            print(f'{"ipv6_address":>15s} : {self.ipv6_address}')
 
 class IwScanItem:
     """ Info about 1 item from iw scan"""
