@@ -1,6 +1,14 @@
 Changelog
 =========
 
+**[2.5.0] ----- 2024-07-08** ::
+
+	    Additional fieleds in report:
+	      connection status
+	      security and wifi tx/rx mode if iwd is used
+	    update Docs/Changelog.rst Docs/iwinfo.pdf
+
+
 **[2.3.0] ----- 2024-07-07** ::
 
 	    Scan report sort firt by band and then by signal instead of just signal
