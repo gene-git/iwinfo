@@ -1,6 +1,12 @@
 Changelog
 =========
 
+**[2.6.1] ----- 2024-07-08** ::
+
+	    bug in scanning report from too much tidying - dont always listen to pylint
+	    update Docs/Changelog.rst Docs/iwinfo.pdf
+
+
 **[2.5.0] ----- 2024-07-08** ::
 
 	    Additional fieleds in report:
