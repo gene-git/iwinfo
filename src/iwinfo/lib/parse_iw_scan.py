@@ -18,9 +18,12 @@ def parse_iw_scan(iw_output:[str], iwscan:'IwScanDevice') -> None:
         #print(f'xxx:{row}')
 
         bssid = found_access_point(raw_row)
+        scan_item = None
         if bssid:
             # AP line
             scan_item = iwscan.add_item(bssid)
+
+        if not scan_item:
             continue
 
         row_split = row.split(':', 1)

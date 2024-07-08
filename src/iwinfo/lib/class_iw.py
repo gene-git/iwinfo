@@ -39,13 +39,25 @@ class IwOurs:
     """ Info about 1 local device """
     def __init__(self, device):
         self.device = device
-        #self.mac = None       # device mac
         self.ssid = None
         self.freq = None
         self.signal = None
         self.rx_bitrate= None
         self.tx_bitrate = None
         self.ap_bssid = None
+        self.addr = None       # device mac
+        self.channel = None
+
+        self.authorized = None
+        self.authenticated = None
+        self.associated = None
+
+        # needs iwd running
+        self.ipv4_address = None
+        self.ipv6_address = None
+        self.security = None
+        self.txmode = None
+        self.rxmode = None
 
     def get_info(self):
         """
@@ -56,14 +68,27 @@ class IwOurs:
     def report(self, wifi_db):
         """ print """
         more_info = _rpt_db_more_info(self.ap_bssid, wifi_db)
-        print(f'  {self.device}:')
-        print(f'    ap_bssid : {self.ap_bssid} : {more_info}')
-        #print(f'         mac : {self.mac}')
-        print(f'        ssid : {self.ssid}')
-        print(f'        freq : {self.freq}')
-        print(f'      signal : {self.signal}')
-        print(f'  rx_bitrate : {self.rx_bitrate}')
-        print(f'  tx_bitrate : {self.tx_bitrate}')
+        print(f'  {self.device} :')
+        print(f'{"ap_bssid":>15s} : {self.ap_bssid} : {more_info}')
+        if self.addr:
+            print(f'{"addr":>15s} : {self.mac}')
+        print(f'{"ssid":>15s} : {self.ssid}')
+        print(f'{"freq":>15s} : {self.freq}')
+        print(f'{"signal":>15s} : {self.signal}')
+        print(f'{"rx_bitrate":>15s} : {self.rx_bitrate}')
+        print(f'{"tx_bitrate":>15s} : {self.tx_bitrate}')
+        if self.authorized:
+            print(f'{"authorized":>15s} : {self.authorized}')
+        if self.authenticated:
+            print(f'{"authenticated":>15s} : {self.authenticated}')
+        if self.associated:
+            print(f'{"associated":>15s} : {self.associated}')
+        if self.security:
+            print(f'{"security":>15s} : {self.security}')
+        if self.txmode:
+            print(f'{"txmode":>15s} : {self.txmode}')
+        if self.rxmode:
+            print(f'{"rxmode":>15s} : {self.rxmode}')
 
 class IwScanItem:
     """ Info about 1 item from iw scan"""

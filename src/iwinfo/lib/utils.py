@@ -4,6 +4,8 @@
 Support tools
 """
 import os
+from collections.abc import Collection
+import re
 
 def dir_exists(indir):
     """
@@ -40,3 +42,26 @@ def open_file(path, mode):
         print(f'Error opening file {path} : {err}')
         fobj = None
     return fobj
+
+def all_in(col1:Collection, col2:Collection):
+    """ return true if every element of col1 is in col2 """
+    s_col1 = set(col1)
+    s_col2 = set(col2)
+    return s_col1.intersection(s_col2) == s_col1
+
+def any_in(col1:Collection, col2:Collection):
+    """ return true if any element of col1 is in col2 """
+    s_col1 = set(col1)
+    s_col2 = set(col2)
+    return s_col1.intersection(s_col2) != set()
+
+def strip_ansi(txt:str) -> str:
+    """
+    Strip ansi escapes
+    """
+    ansi_escape = re.compile(
+               br'(?:\x1B[@-Z\\-_]|[\x80-\x9A\x9C-\x9F]|(?:\x1B\[|\x9B)[0-?]*[ -/]*[@-~])'
+            )
+    clean = ansi_escape.sub(b'', txt.encode())
+    clean = clean.decode().strip()
+    return clean
