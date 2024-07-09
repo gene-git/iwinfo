@@ -11,7 +11,8 @@
 #     ip = 'xxx.xxx.xxx.xxx'
 #     mac_map = [ ['chanel_name', ''x:x:x:x:x:x'],
 #                 'chanel_name', ''x:x:x:x:x:x'], ... ]
-#     model = 'Netgear'
+#     make = 'Netgear'
+#     model = 'R7000'
 #     info = 'location or other useful stuff'
 #
 # NB 
@@ -23,10 +24,12 @@
 
 [ap0]
     ip = '10.0.0.10'
-    mac_map = [['5GHz', 'x:x:x:x:x:x'],
+    mac_map = [['6Ghz', 'x:x:x:x:x:x'],
+               ['5GHz', 'x:x:x:x:x:x'],
                ['24Ghz', 'x:x:x:x:x:x'],
                ['lan', 'x:x:x:x:x:x'],
               ]
-    model = 'Netgear R7800'
-    info = 'Main Office'
+    make = 'Netgear'
+    model = 'R7800'
+    info = 'Office'
         

@@ -38,12 +38,9 @@ def _read_wifi_db(wifi_db):
         return devices
 
     #
-    # new db uses mac_map = [ [name1, mac], [name2, mac2], ...]
-    # name can be '5 Ghz', or '2.4 Ghz' or 'lan' or ...
-    # old uses i5GHz,i24Ghz, lan = mac
+    # db uses mac_map = [ [name1, mac], [name2, mac2], ...]
+    # name can be '5 Ghz', or '2.4 Ghz' or 'lan' or anything else
     #
-    old_keys = ['i5GHz', 'i24Ghz', 'lan']
-
     data = fob.read()
     fob.close()
     try:
@@ -63,17 +60,12 @@ def _read_wifi_db(wifi_db):
                 if skey == 'mac_map':
                     for [name, mac] in sval:
                         device.mac_map[name] = mac
-
-                elif skey in old_keys:
-                    # old style - drop leading "i"
-                    freq = skey.replace('i', '', 1)
-                    device.mac_map[freq] = sval
-
                 else:
                     setattr(device, skey, sval)
         else :
-            # top level global variables (not expected)
+            # Any top level global variables (not expected)
             setattr(wifi_db, key, val)
+
     return devices
 
 def _build_bssid_index(devices):
@@ -95,6 +87,7 @@ class WifiDevice:
         self.name = name
         self.ip = None
         self.mac_map = {}
+        self.make = None
         self.model = None
         self.info = None
 
@@ -115,6 +108,7 @@ class WifiDb:
         """
         Find device from mac
         """
+        make = ''
         model = ''
         info = ''
         if not bssid or not self.devices_by_bssid:
@@ -123,6 +117,7 @@ class WifiDb:
         bssid = bssid.lower()
         device = self.devices_by_bssid.get(bssid)
         if device:
+            make = device.make
             model = device.model
             info = device.info
-        return (model, info)
+        return (make, model, info)

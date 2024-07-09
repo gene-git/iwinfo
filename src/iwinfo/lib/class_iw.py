@@ -28,9 +28,11 @@ def _rpt_db_more_info(bssid, wifi_db):
     """
     more_info = ''
     if wifi_db:
-        (model, info) = wifi_db.get_dev_info(bssid)
+        (make, model, info) = wifi_db.get_dev_info(bssid)
+        if make:
+            more_info += f'{make:>10s} '
         if model:
-            more_info = f'{model:^18s} '
+            more_info += f'{model:^10s} '
         if info:
             more_info += info
     return more_info
