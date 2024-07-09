@@ -1,6 +1,12 @@
 Changelog
 =========
 
+**[3.0.0] ----- 2024-07-09** ::
+
+	    Scan sort order now frequency band (high->low) then on signal (best->worst)
+	    update Docs/Changelog.rst Docs/iwinfo.pdf
+
+
 **[2.10.0] ----- 2024-07-09** ::
 
 	    Add channel and mac address to report
