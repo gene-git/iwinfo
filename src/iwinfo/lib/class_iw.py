@@ -104,6 +104,7 @@ class IwScanItem:
         self.freq = None
         self.signal = ''
 
+
     def report(self, ap_bssids, wifi_db):
         """ print """
         mark = ' '
@@ -120,6 +121,19 @@ class IwScanItem:
 
         print(f' {mark} {bssid}: {ssid:20s} {freq:8s} {signal} : {more_info}')
 
+def _sort_key_freq(item:IwScanItem):
+    """ return freq attrib """
+    band = item.freq
+    if band:
+        band = band.strip()[0]
+    else:
+        band = ''
+    return band
+
+def _sort_key_signal(item:IwScanItem):
+    """ return freq attrib """
+    return item.signal
+
 class IwScanDevice:
     """ Info about 1 item from iw scan"""
     def __init__(self, device):
@@ -134,20 +148,25 @@ class IwScanDevice:
         self.scan_items.append(scan_item)
         return scan_item
 
+    def sort_scan_items(self):
+        """
+        Sort scan items
+          - freq band (i.e. digit) (high to low)
+          - signal (low to high)
+        Uses python 3 complex sorted. Sort on secondary column, then on primary
+        """
+        if not (self.scan_items and len(self.scan_items) > 1):
+            return
+        self.scan_items = sorted(self.scan_items, key=_sort_key_signal)
+        self.scan_items.sort(key=_sort_key_freq, reverse=True)
+
     def report(self, ap_bssids, wifi_db):
-        """ report """
-        # sort by signal
-
-        #scan_items = sorted(self.scan_items, key=lambda x: (x.freq, x.signal))
+        """
+        report
+        """
+        self.sort_scan_items()
         scan_items = self.scan_items
-        if scan_items and len(scan_items) > 1:
-            #for item in self.scan_items:
-            #    if item.freq:
-            #        item.freq = x.freq.strip()
-            #    else:
-            #        item.freq = '-'
 
-            scan_items = sorted(self.scan_items, key=lambda x: (x.freq.strip()[0], x.signal))
         if not scan_items:
             scan_items = []
         for item in scan_items:
