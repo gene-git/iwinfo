@@ -1,8 +1,9 @@
 Changelog
 =========
 
-**[HEAD] ----- 2024-07-09** ::
+**[3.2.0, origin/master] ----- 2024-07-09** ::
 
+	    update Docs/Changelog.rst Docs/iwinfo.pdf
 	    User wifi.db separate model into make, model
 	    update Docs/Changelog.rst Docs/iwinfo.pdf
 
