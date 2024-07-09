@@ -70,10 +70,10 @@ class IwOurs:
         more_info = _rpt_db_more_info(self.ap_bssid, wifi_db)
         print(f'  {self.device} :')
         print(f'{"ap_bssid":>15s} : {self.ap_bssid} : {more_info}')
-        if self.addr:
-            print(f'{"addr":>15s} : {self.mac}')
         print(f'{"ssid":>15s} : {self.ssid}')
         print(f'{"freq":>15s} : {self.freq}')
+        if self.channel:
+            print(f'{"channel":>15s} : {self.channel}')
         print(f'{"signal":>15s} : {self.signal}')
         print(f'{"rx_bitrate":>15s} : {self.rx_bitrate}')
         print(f'{"tx_bitrate":>15s} : {self.tx_bitrate}')
@@ -89,6 +89,8 @@ class IwOurs:
             print(f'{"txmode":>15s} : {self.txmode}')
         if self.rxmode:
             print(f'{"rxmode":>15s} : {self.rxmode}')
+        if self.addr:
+            print(f'{"mac_addr":>15s} : {self.addr}')
         if self.ipv4_address:
             print(f'{"ipv4_address":>15s} : {self.ipv4_address}')
         if self.ipv6_address:

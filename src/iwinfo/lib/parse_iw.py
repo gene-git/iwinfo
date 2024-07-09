@@ -77,7 +77,7 @@ def parse_iw(iw_output:[str], cmd:str, iwours:'IwOurs') -> None:
         _parse_iw_link(iw_output, iwours)
 
     elif cmd == 'info':
-        _parse_iw_link(iw_output, iwours)
+        _parse_iw_info(iw_output, iwours)
 
     elif cmd == 'dump':
         _parse_iw_dump(iw_output, iwours)
