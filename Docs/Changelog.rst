@@ -1,6 +1,12 @@
 Changelog
 =========
 
+**[HEAD] ----- 2024-07-09** ::
+
+	    User wifi.db separate model into make, model
+	    update Docs/Changelog.rst Docs/iwinfo.pdf
+
+
 **[3.0.0] ----- 2024-07-09** ::
 
 	    Scan sort order now frequency band (high->low) then on signal (best->worst)
