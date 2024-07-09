@@ -3,5 +3,5 @@
 """
 Project iwinfo
 """
-__version__ = "2.9.0"
+__version__ = "2.10.0"
 
