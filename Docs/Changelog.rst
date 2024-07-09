@@ -1,6 +1,12 @@
 Changelog
 =========
 
+**[2.10.0] ----- 2024-07-09** ::
+
+	    Add channel and mac address to report
+	    update Docs/Changelog.rst Docs/iwinfo.pdf
+
+
 **[2.9.0] ----- 2024-07-09** ::
 
 	    Add channel and mac address to report
