@@ -1,7 +1,13 @@
 Changelog
 =========
 
-**[3.2.0, origin/master] ----- 2024-07-09** ::
+**[3.3.0] ----- 2024-07-10** ::
+
+	    Report interface info before starting network scan
+	    update Docs/Changelog.rst Docs/iwinfo.pdf
+
+
+**[3.2.0] ----- 2024-07-09** ::
 
 	    update Docs/Changelog.rst Docs/iwinfo.pdf
 	    User wifi.db separate model into make, model
