@@ -112,7 +112,7 @@ class WifiDb:
         model = ''
         info = ''
         if not bssid or not self.devices_by_bssid:
-            return (model, info)
+            return (make, model, info)
 
         bssid = bssid.lower()
         device = self.devices_by_bssid.get(bssid)
