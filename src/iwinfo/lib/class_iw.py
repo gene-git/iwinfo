@@ -249,8 +249,8 @@ class IwInfo:
         Do what has been requested
         """
         self.get_our_wifi_info()
-        if self.do_scan:
-            self.scan()
+        #if self.do_scan:
+        #    self.scan()
 
     def report(self):
         """
@@ -269,7 +269,8 @@ class IwInfo:
                 phy_info.report()
 
         if self.do_scan:
-            print('\nScan Results:')
+            print('\nScanning network ...')
+            self.scan()
             for (dev, scan_device) in self.scan_device.items():
                 print(f'  {dev}:')
                 scan_device.report(self.ap_bssids, wifi_db)
