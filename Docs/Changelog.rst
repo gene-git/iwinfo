@@ -1,6 +1,12 @@
 Changelog
 =========
 
+**[3.4.0] ----- 2024-07-10** ::
+
+	    Bugfix when no user wifi.db returning incorrect number of parameters
+	    update Docs/Changelog.rst Docs/iwinfo.pdf
+
+
 **[3.3.0] ----- 2024-07-10** ::
 
 	    Report interface info before starting network scan
