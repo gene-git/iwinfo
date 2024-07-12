@@ -16,15 +16,32 @@ Scan is turned on using *-s* option.
 
 Scanning wireless networks requires elevated privileges, which means either by running as
 root or by being provided with the required cap_net_xxx capablilities. 
+Scanning is only permitted to users who are members of *wheel* group.
 
 This package provides the application, written in python, along with a small
 C-program which is installed with cap_net_raw and cap_net_admin [#]_ 
 and it provides the capabilities for the program to be run non-root.
-Since this does add some risk, scanning is limited to root and members
-of the *wheel* group only.
+
+Since this does add some level of risk, scanning is limited to root and members
+of the *wheel* group only. 
+
+Some addititional information is gathered using *iwctl* when *iwd* is running. 
+These are the *ip addres*, *security mode* (e.g. WPA2), and *transmission type* (e.g. 802.11ax).
+These require either root or membership in *network* or *wheel* groups.
 
 Others will still be able to get local wireless device and connection info, but will
 not be able to scan the network(s).
+
+Summary:
+
+    =====  ====   =============== =====================
+    Info   User   Group *network* Group *wheel* or root
+    =====  ====   =============== =====================
+    Basic   ✔          ✔               ✔ 
+    Extra   ✕          ✔               ✔
+    Scan    ✕          ✕               ✔
+    =====  ====   =============== =====================
+
 
 .. [#] See man capabilities.
 
