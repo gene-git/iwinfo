@@ -1,6 +1,14 @@
 Changelog
 =========
 
+**[3.4.2] ----- 2024-12-31** ::
+
+	    Git tags are now signed.
+	    Update SPDX tags
+	    Add git signing key to Arch Package
+	    update Docs/Changelog.rst Docs/iwinfo.pdf
+
+
 **[3.4.1] ----- 2024-07-12** ::
 
 	    Update README
