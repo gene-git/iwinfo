@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: MIT
-# Copyright (c) 2023 Gene C
+# SPDX-FileCopyrightText: © 2023-present  Gene C <arch@sapience.com>
 """
 Support tools
 """
 import os
-from collections.abc import Collection
+from typing import Iterable
 import re
 
 def dir_exists(indir):
@@ -43,13 +43,13 @@ def open_file(path, mode):
         fobj = None
     return fobj
 
-def all_in(col1:Collection, col2:Collection):
+def all_in(col1:Iterable, col2:Iterable):
     """ return true if every element of col1 is in col2 """
     s_col1 = set(col1)
     s_col2 = set(col2)
     return s_col1.intersection(s_col2) == s_col1
 
-def any_in(col1:Collection, col2:Collection):
+def any_in(col1:Iterable, col2:Iterable):
     """ return true if any element of col1 is in col2 """
     s_col1 = set(col1)
     s_col2 = set(col2)

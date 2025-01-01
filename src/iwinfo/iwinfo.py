@@ -1,4 +1,6 @@
 #!/usr/bin/python
+# SPDX-License-Identifier: MIT
+# SPDX-FileCopyrightText: © 2023-present  Gene C <arch@sapience.com>
 """
 Report wireless network info
 """

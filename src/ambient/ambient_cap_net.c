@@ -12,7 +12,8 @@
  * 
  *  sudo setcap cap_setpcap,cap_net_raw,cap_net_admin+eip ambient
  * 
- * Gene C (c) 2023
+ * SPDX-License-Identifier: MIT
+ * SPDX-FileCopyrightText: © 2023-present  Gene C <arch@sapience.com>
  */
 
 #include <stdlib.h>
