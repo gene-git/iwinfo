@@ -91,6 +91,9 @@ def _runit(pargs:[str]) -> [str]:
     """
     Runs pargs and returns output lines or None if failed
     """
+    if not pargs:
+        return None
+
     result = None
     [ret, out, err] = run_prog(pargs)
     if ret != 0:

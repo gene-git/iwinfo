@@ -6,6 +6,7 @@ run_prog.py
  gc 2022-04-17
 """
 import subprocess
+from subprocess import SubprocessError
 
 def run_prog(pargs, input_str=None,stdout=subprocess.PIPE,stderr=subprocess.PIPE):
     """
@@ -19,9 +20,12 @@ def run_prog(pargs, input_str=None,stdout=subprocess.PIPE,stderr=subprocess.PIPE
     if input_str:
         bstring = bytearray(input_str,'utf-8')
 
-    ret = subprocess.run(pargs, input=bstring, stdout=stdout, stderr=stderr,check=False)
-    retc = ret.returncode
+    try:
+        ret = subprocess.run(pargs, input=bstring, stdout=stdout, stderr=stderr,check=False)
+    except (FileNotFoundError, SubprocessError) as err:
+        return [-1, None, err]
 
+    retc = ret.returncode
     output = None
     errors = None
     if ret.stdout :
