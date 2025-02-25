@@ -1,6 +1,12 @@
 Changelog
 =========
 
+**[3.5.1] ----- 2025-02-25** ::
+
+	    Fix typo in PKGBUILD from 3.5.0
+	    update Docs/Changelog.rst Docs/iwinfo.pdf
+
+
 **[3.5.0] ----- 2025-02-25** ::
 
 	    More checking of missing programs. Found by aur report from @simona
