@@ -1,6 +1,13 @@
 Changelog
 =========
 
+**[3.5.0] ----- 2025-02-25** ::
+
+	    More checking of missing programs. Found by aur report from @simona
+	    Add iwd as dependency to provide /usr/bin/iwctl
+	    update Docs/Changelog.rst Docs/mkpkg.pdf for 3.4.2
+
+
 **[3.4.2] ----- 2024-12-31** ::
 
 	    Git tags are now signed.
