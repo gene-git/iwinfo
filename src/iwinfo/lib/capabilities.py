@@ -6,8 +6,11 @@ Check for cap_net_raw, cap_net_admin
 import os
 import capng
 
-def _check_have_net_caps():
+
+def _check_have_net_caps() -> bool:
     """
+    To scan capabilities requried:
+        cap_net_raw, cap_net_admin
     libcap_ng version >= 0.6 provides python bindings to libcap_nd
     In addition, versions >= 0.8.3 provide drop ambient
     """
@@ -15,7 +18,8 @@ def _check_have_net_caps():
     # Check have ambient caps
     #  - ambient is required to run programs for network scan (e.g. iw)
     #
-    if not capng.capng_have_capabilities(capng.CAPNG_SELECT_AMBIENT) > capng.CAPNG_NONE:
+    if not (capng.capng_have_capabilities(capng.CAPNG_SELECT_AMBIENT)
+            > capng.CAPNG_NONE):
         return False
 
     #
@@ -33,7 +37,8 @@ def _check_have_net_caps():
         return True
     return False
 
-def have_net_caps():
+
+def have_net_caps() -> bool:
     """
     check for net caps we need for iw
     Couple ways to do this.
@@ -47,7 +52,7 @@ def have_net_caps():
         return is_root
 
     #
-    # check have needed caps
+    # Capabilities needed
     #
     have_caps = _check_have_net_caps()
 

@@ -17,6 +17,12 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
 ]
 dependencies = []
+[tool.hatch.build.targets.wheel]
+packages = ["src/iwinfo"]
+include = [
+    "src/iwinfo",
+]
+
 
 [project.urls]
 #Documentation = "https://github.com/gene-git/iwinfo/Docs"
@@ -27,5 +33,10 @@ dependencies = []
 path = "src/iwinfo/__about__.py"
 
 [[tool.hatch.envs.all.matrix]]
-python = ["3.10", "3.11", "3.12"]
+python = ["3.12", "3.13", "3.14"]
+
+[tool.mypy]
+check_untyped_defs = true
+follow_untyped_imports = true
+mypy_path = "src/iwinfo/stubs"
 

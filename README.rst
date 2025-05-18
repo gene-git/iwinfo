@@ -42,6 +42,10 @@ Summary:
     Scan    ✕          ✕               ✔
     =====  ====   =============== =====================
 
+ * All git tags are signed with arch@sapience.com key which is available via WKD
+   or download from https://www.sapience.com/tech. Add the key to your package builder gpg keyring.
+   The key is included in the Arch package and the source= line with *?signed* at the end can be used
+   to verify the git tag.  You can also manually verify the signature
 
 .. [#] See man capabilities.
 
@@ -55,10 +59,15 @@ Key features
 New / Interesting
 ==================
 
- * All git tags are signed with arch@sapience.com key which is available via WKD
-   or download from https://www.sapience.com/tech. Add the key to your package builder gpg keyring.
-   The key is included in the Arch package and the source= line with *?signed* at the end can be used
-   to verify the git tag.  You can also manually verify the signature
+ * Code now complies with: PEP-8, PEP-257, PEP-484 and PEP-561
+ * Code Refactor & clean ups.
+ * Wireless "host" database file name.
+
+   Preferred name is now known-hosts.toml, which aligns better with it's purpose and format.
+   The previous names will continue to work just fine as well.
+
+   The known host file will first be looked for in the directory *./etc/iwinfo/* and then */etc/iwinfo/*.
+
 
 ###############
 Getting Started

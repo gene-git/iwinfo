@@ -3,4 +3,4 @@
 """
 Support library for iwinfo
 """
-from .class_iw import IwInfo
+from .class_iwinfo import IwInfo

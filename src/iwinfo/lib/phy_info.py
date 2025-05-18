@@ -4,14 +4,19 @@
 Parse output if 'iw list'
 """
 # pylint: disable=too-many-branches,too-many-statements,too-few-public-methods
+from typing import (Dict, List)
+
+
 class IwPhyInfo:
-    """ wifi capabilities by phy """
+    """
+    Info about one phy
+    """
     def __init__(self, phy_name):
         self.phy = phy_name
         self.interface = None
         self.addr = None
         self.num_bands = 0
-        self.freq: [str] = []
+        self.freq: List[str] = []
         self.wifi_type = None
         self.ieee_type = None
 
@@ -20,22 +25,40 @@ class IwPhyInfo:
         wifi_type = self.wifi_type or 'wifi-?'
         ieee_type = self.ieee_type or '80211.?'
         ieee_type = f'({ieee_type})'
-        freq = '-'
+        freq_str = '-'
         if self.freq:
             freq = sorted(list(set(self.freq)))
-            freq = ' '.join(freq)
+            freq_str = ' '.join(freq)
 
-        print(f'{"":6s} {wifi_type:>10s} {ieee_type:<10s} {self.num_bands:>3d}-bands : {freq}')
+        wifi_type = f'{wifi_type:>10s}'
+        ieee_type = f'{ieee_type:<10s}'
+        num_bands = f'{self.num_bands:>3d}-bands'
 
-def parse_iw_list(iw_output:[str]) -> dict:
+        print(f'{"":6s} {wifi_type} {ieee_type} {num_bands} : {freq_str}')
+
+
+def parse_iw_list(iw_output: List[str]) -> Dict[str, IwPhyInfo]:
     """
-    Extract what we need from iw output
+    Extract data from 'iw list' output
+
+    Args:
+        iw_output (List[str]):
+        Stdout from 'iw' command
+
+    Returns:
+        Dict[name: str, phy: IwPhyInfo]
+        Dictionary of phy devices indexed by phy name.
     """
-    phys = {}
-    phy = None
+    phys: Dict[str, IwPhyInfo] = {}
+
+    if not iw_output:
+        return phys
+
+    # phy = None
     for row in iw_output:
         row = row.strip()
         srow = row.split()
+
         if row.startswith('Wiphy phy'):
             # new phy
             name = srow[1]
@@ -49,6 +72,7 @@ def parse_iw_list(iw_output:[str]) -> dict:
 
             phy.wifi_type = 'wifi-1'
             phy.ieee_type = '802.11b'
+
             if phy.num_bands >= 2:
                 phy.wifi_type = 'wifi-3'
                 phy.ieee_type = '802.11g'
@@ -57,9 +81,9 @@ def parse_iw_list(iw_output:[str]) -> dict:
                 phy.ieee_type = '802.11ax'
             continue
 
-
         if '* 5180.0 MHz [36]' in row:
             phy.freq.append('5-GHz')
+
             if phy.num_bands == 1:
                 phy.wifi_type = 'wifi-2'
                 phy.ieee_type = '802.11a'

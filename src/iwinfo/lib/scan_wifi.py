@@ -3,11 +3,14 @@
 """
 Deals with scanning wifi
 """
+from typing import (List)
 import time
-from .run_prog import run_prog
+from .run_prog import run_cmd
 from .parse_iw_scan import parse_iw_scan
+from ._iw_hosts import IwHosts
 
-def get_iw_scan(dev:str, iwscan:'IwScanDevice'):
+
+def get_iw_scan(device_name: str, iw_hosts: IwHosts):
     """
     Use iw scan to get info from this device
     Requres priv capabilites - see class_iw for more info
@@ -17,22 +20,20 @@ def get_iw_scan(dev:str, iwscan:'IwScanDevice'):
     count = 0
     naptime = 0.2
     while count < max_tries:
-        result = _iw_scan(dev, quiet=True)
+        result = _iw_scan(device_name)
         if result:
-            parse_iw_scan(result, iwscan)
+            hosts = parse_iw_scan(result)
+            iw_hosts.add_hosts(hosts)
             break
         time.sleep(naptime)
 
-def _iw_scan(dev:str, quiet:bool=True):
+
+def _iw_scan(device_name: str) -> List[str]:
     """
     Use iw scan to get info from this device
     Requres priv capabilites - see class_iw for more info
     """
-    pargs = ['/usr/bin/iw', 'dev', dev, 'scan']
-    [ret, out, err] = run_prog(pargs)
-    if ret != 0:
-        if err and not quiet:
-            print(err)
-        return None
-    result = out.splitlines()
+    result: List[str] = []
+    pargs = ['/usr/bin/iw', 'dev', device_name, 'scan']
+    result = run_cmd(pargs)
     return result
