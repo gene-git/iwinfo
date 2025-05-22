@@ -7,12 +7,19 @@ Tags
 
 ::
 
-	2.0.1 (2024-04-13) -> 4.0.0 (2025-05-18)
-	50 commits.
+	2.0.1 (2024-04-13) -> 4.1.0 (2025-05-21)
+	52 commits.
 
 Commits
 =======
 
+
+* 2025-05-21  : **4.1.0**
+
+::
+
+                Use builtin types where possible. e.g. typing.List -> list
+ 2025-05-18     update Docs/Changelog Docs/${my_name}.pdf
 
 * 2025-05-18  : **4.0.0**
 
