@@ -3,27 +3,26 @@
 """
 Parse output if 'iw scan'
 """
-from typing import (List)
 from .parse_tools import found_access_point
 from ._iw_host import IwHost
 
 
-def parse_iw_scan(iw_output: List[str]) -> List[IwHost]:
+def parse_iw_scan(iw_output: list[str]) -> list[IwHost]:
     """
     Extract what we need from iw scan output from one wireless device.
 
     Args:
-        iw_output (List[str]):
+        iw_output (list[str]):
         Output from running "iw scan"
 
     Returns:
-        List[IwHost]:
-        List of "IwHost".
+        list[IwHost]:
+        list of "IwHost".
 
     """
     keys = ['SSID', 'freq', 'signal']
 
-    hosts: List[IwHost] = []
+    hosts: list[IwHost] = []
     if not iw_output:
         return hosts
 

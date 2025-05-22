@@ -18,7 +18,6 @@ Runs iw dev <dev> 'command'
     sudo setcap cap_net_raw,cap_net_admin+eip /usr/bin/iwinfo
 """
 # pylint: disable=too-many-instance-attributes,too-few-public-methods
-from typing import (Dict, List)
 from .our_wifi import (get_phy_list, get_device_names)
 from .phy_info import IwPhyInfo
 from ._iw_hosts import IwHosts
@@ -43,15 +42,15 @@ class IwInfo:
         self.do_scan: bool = False
 
         # local devices
-        self.device_names: List[str] = []
-        self.devices: Dict[str, Device] = {}
-        self.ap_bssids: List[str] = []
+        self.device_names: list[str] = []
+        self.devices: dict[str, Device] = {}
+        self.ap_bssids: list[str] = []
 
         # phy info
-        self.phys: Dict[str, IwPhyInfo]
+        self.phys: dict[str, IwPhyInfo]
 
         # scanned devices - do 1 scan per local device
-        self.iw_hosts: Dict[str, IwHosts] = {}
+        self.iw_hosts: dict[str, IwHosts] = {}
 
         # Local wifi device info file (/etc/iwinfo/wifi.db)
         self.known_hosts = KnownHosts()

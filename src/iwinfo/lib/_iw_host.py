@@ -15,7 +15,6 @@ Runs iw dev <dev> 'command'
     sudo setcap cap_net_raw,cap_net_admin+eip /usr/bin/iwinfo
 """
 # pylint: disable=too-few-public-methods
-from typing import (List)
 from ._known_hosts import KnownHosts
 
 
@@ -31,7 +30,7 @@ class IwHost:
         self.freq: str = ''
         self.signal: str = ''
 
-    def report(self, ap_bssids: List[str], known_hosts: KnownHosts):
+    def report(self, ap_bssids: list[str], known_hosts: KnownHosts):
         """
         Print one line report of this host.
         """

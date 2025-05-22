@@ -3,7 +3,6 @@
 """
 Deals with scanning wifi
 """
-from typing import (List)
 import time
 from .run_prog import run_cmd
 from .parse_iw_scan import parse_iw_scan
@@ -28,12 +27,12 @@ def get_iw_scan(device_name: str, iw_hosts: IwHosts):
         time.sleep(naptime)
 
 
-def _iw_scan(device_name: str) -> List[str]:
+def _iw_scan(device_name: str) -> list[str]:
     """
     Use iw scan to get info from this device
     Requres priv capabilites - see class_iw for more info
     """
-    result: List[str] = []
+    result: list[str] = []
     pargs = ['/usr/bin/iw', 'dev', device_name, 'scan']
     result = run_cmd(pargs)
     return result

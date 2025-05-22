@@ -18,7 +18,6 @@ Runs iw dev <dev> 'command'
     sudo setcap cap_net_raw,cap_net_admin+eip /usr/bin/iwinfo
 """
 # pylint: disable=too-many-instance-attributes,too-few-public-methods
-from typing import (List)
 from ._known_hosts import KnownHosts
 from ._iw_host import IwHost
 
@@ -51,7 +50,7 @@ class IwHosts:
 
         # list of found IwHost
         # scan_items -> hosts
-        self.scan_items: List[IwHost] = []
+        self.scan_items: list[IwHost] = []
 
     def add_item(self, bssid: str) -> IwHost:
         """ Add new scan item """
@@ -59,7 +58,7 @@ class IwHosts:
         self.scan_items.append(scan_item)
         return scan_item
 
-    def add_hosts(self, hosts: List[IwHost]):
+    def add_hosts(self, hosts: list[IwHost]):
         """
         Add list of hosts
         """
@@ -78,7 +77,7 @@ class IwHosts:
         self.scan_items = sorted(self.scan_items, key=_sort_key_signal)
         self.scan_items.sort(key=_sort_key_freq, reverse=True)
 
-    def report(self, ap_bssids: List[str], known_hosts: KnownHosts):
+    def report(self, ap_bssids: list[str], known_hosts: KnownHosts):
         """
         repore
         """

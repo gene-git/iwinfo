@@ -5,7 +5,6 @@ run_prog.py
  Run program as a subprocess and return status, stdout and stderr
  gc 2022-04-17
 """
-from typing import (List, Tuple)
 import subprocess
 from subprocess import SubprocessError
 
@@ -14,7 +13,7 @@ def run_prog(pargs,
              input_str: str = '',
              stdout: int = subprocess.PIPE,
              stderr: int = subprocess.PIPE
-             ) -> Tuple[int, str, str]:
+             ) -> tuple[int, str, str]:
     """
     Run external program using subprocess
      pargs     - array of program + arguments ['prog', 'arg1', ...]
@@ -49,21 +48,21 @@ def run_prog(pargs,
     return (retc, output, errors)
 
 
-def run_cmd(pargs: List[str]) -> List[str]:
+def run_cmd(pargs: list[str]) -> list[str]:
     """
     Run cmd with provided arguments and return stdout.
 
     Variation of run_prog with simpler calling convention.
     Args:
-        pargs (List[str]):
+        pargs (list[str]):
         Standard list of command and arguments.
     Returns:
-        List[str]:
-        List of lines of stdout from running program.
+        list[str]:
+        list of lines of stdout from running program.
         May be empty list.
 
     """
-    result: List[str] = []
+    result: list[str] = []
 
     (ret, out, err) = run_prog(pargs)
     if ret != 0:

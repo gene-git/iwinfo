@@ -4,7 +4,6 @@
 Local wifi informational database (optional)
 """
 # pylint: disable=invalid-name,too-few-public-methods
-from typing import (Dict, Tuple)
 import os
 import tomllib as toml
 from tomllib import TOMLDecodeError
@@ -18,7 +17,7 @@ class KnownHost:
     def __init__(self, name):
         self.name: str = name
         self.ip: str = ''
-        self.mac_map: Dict[str, str] = {}
+        self.mac_map: dict[str, str] = {}
         self.make: str = ''
         self.model: str = ''
         self.info: str = ''
@@ -47,11 +46,11 @@ def _get_known_host_file() -> str:
     return known_host_file
 
 
-def _read_known_hosts(known_hosts) -> Dict[str, KnownHost]:
+def _read_known_hosts(known_hosts) -> dict[str, KnownHost]:
     """
     Read the known hosts file and map it into attributes
     """
-    hosts: Dict[str, KnownHost] = {}
+    hosts: dict[str, KnownHost] = {}
 
     fob = open_file(known_hosts.dbfile, 'r')
     if not fob:
@@ -90,11 +89,11 @@ def _read_known_hosts(known_hosts) -> Dict[str, KnownHost]:
     return hosts
 
 
-def _build_bssid_index(hosts: Dict[str, KnownHost]) -> Dict[str, KnownHost]:
+def _build_bssid_index(hosts: dict[str, KnownHost]) -> dict[str, KnownHost]:
     """
     build mac based index map
     """
-    bssid_index: Dict[str, KnownHost] = {}
+    bssid_index: dict[str, KnownHost] = {}
     if not hosts:
         return bssid_index
 
@@ -115,8 +114,8 @@ class KnownHosts:
     """
     def __init__(self):
         self.dbfile: str = _get_known_host_file()
-        self.hosts: Dict[str, KnownHost] = {}
-        self.hosts_by_bssid: Dict[str, KnownHost] = {}
+        self.hosts: dict[str, KnownHost] = {}
+        self.hosts_by_bssid: dict[str, KnownHost] = {}
 
         if not self.dbfile:
             return
@@ -124,7 +123,7 @@ class KnownHosts:
         self.hosts = _read_known_hosts(self)
         self.hosts_by_bssid = _build_bssid_index(self.hosts)
 
-    def _get_host_info(self, bssid: str) -> Tuple[str, str, str]:
+    def _get_host_info(self, bssid: str) -> tuple[str, str, str]:
         """
         Find device from mac
         """

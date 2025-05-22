@@ -4,7 +4,6 @@
 Parse output if 'iw list'
 """
 # pylint: disable=too-many-branches,too-many-statements,too-few-public-methods
-from typing import (Dict, List)
 
 
 class IwPhyInfo:
@@ -16,7 +15,7 @@ class IwPhyInfo:
         self.interface = None
         self.addr = None
         self.num_bands = 0
-        self.freq: List[str] = []
+        self.freq: list[str] = []
         self.wifi_type = None
         self.ieee_type = None
 
@@ -37,19 +36,19 @@ class IwPhyInfo:
         print(f'{"":6s} {wifi_type} {ieee_type} {num_bands} : {freq_str}')
 
 
-def parse_iw_list(iw_output: List[str]) -> Dict[str, IwPhyInfo]:
+def parse_iw_list(iw_output: list[str]) -> dict[str, IwPhyInfo]:
     """
     Extract data from 'iw list' output
 
     Args:
-        iw_output (List[str]):
+        iw_output (list[str]):
         Stdout from 'iw' command
 
     Returns:
-        Dict[name: str, phy: IwPhyInfo]
-        Dictionary of phy devices indexed by phy name.
+        dict[name: str, phy: IwPhyInfo]
+        dictionary of phy devices indexed by phy name.
     """
-    phys: Dict[str, IwPhyInfo] = {}
+    phys: dict[str, IwPhyInfo] = {}
 
     if not iw_output:
         return phys

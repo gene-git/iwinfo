@@ -4,7 +4,8 @@
 Support tools
 """
 import os
-from typing import (IO, Iterable, List)
+from typing import (IO)
+from collections.abc import (Iterable)
 import re
 
 
@@ -15,12 +16,12 @@ def dir_exists(indir: str) -> bool:
     return bool(os.path.exists(indir) and os.path.isdir(indir))
 
 
-def filelist(indir: str, name_type: str = 'name') -> List[str]:
+def filelist(indir: str, name_type: str = 'name') -> list[str]:
     """
     read directory and return list of files or links
     name_type : name or path
     """
-    flist: List[str] = []
+    flist: list[str] = []
     if dir_exists(indir):
         scan = os.scandir(indir)
         for item in scan:

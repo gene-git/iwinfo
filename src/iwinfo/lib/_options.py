@@ -4,10 +4,10 @@
 Command line option handling
 """
 # pylint: disable=too-few-public-methods
-from typing import (Any, Dict, List, Tuple)
+from typing import (Any)
 import argparse
 
-type Opt = Tuple[str | Tuple[str, str], Dict[str, Any]]
+type Opt = tuple[str | tuple[str, str], dict[str, Any]]
 
 
 class Options:
@@ -22,7 +22,7 @@ class Options:
         self.okay: bool = True
         self.scan: bool = False
 
-        opts: List[Opt] = []
+        opts: list[Opt] = []
 
         #
         # Establish the list of optiont

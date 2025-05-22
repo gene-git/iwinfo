@@ -3,7 +3,6 @@
 """
 Deals with local wifi things
 """
-from typing import (Dict, List)
 from .run_prog import run_cmd
 from .utils import filelist
 from .parse_iw import (parse_iw, parse_iwctl_show)
@@ -11,13 +10,13 @@ from .phy_info import (IwPhyInfo, parse_iw_list)
 from ._device_base import DeviceBase
 
 
-def get_device_names() -> List[str]:
+def get_device_names() -> list[str]:
     """
     list of local wifi devices
     """
     netdir = '/sys/class/net'
 
-    device_names: List[str] = []
+    device_names: list[str] = []
 
     files = filelist(netdir)
     for file in files:
@@ -79,14 +78,14 @@ def _run_iwctl(device: DeviceBase, cmd: str):
         parse_iwctl_show(result, device)
 
 
-def get_phy_list() -> Dict[str, IwPhyInfo]:
+def get_phy_list() -> dict[str, IwPhyInfo]:
     """
     Try get all phy info
 
     Run "iw list".
 
     Returns:
-        Dict[str, IwPhyInfo]:
+        dict[str, IwPhyInfo]:
         Dictionary phy info indexed by phy name.
     """
     pargs = ['/usr/bin/iw', 'list']
