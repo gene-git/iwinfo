@@ -7,12 +7,19 @@ Tags
 
 ::
 
-	2.0.1 (2024-04-13) -> 4.2.0 (2025-06-16)
-	54 commits.
+	2.0.1 (2024-04-13) -> 4.3.0 (2025-06-22)
+	56 commits.
 
 Commits
 =======
 
+
+* 2025-06-22  : **4.3.0**
+
+::
+
+                run_prog: sync our copy with latest from pyconcurrent
+ 2025-06-16     update Docs/Changelog Docs/${my_name}.pdf
 
 * 2025-06-16  : **4.2.0**
 

@@ -3,7 +3,7 @@
 """
 Deals with local wifi things
 """
-from .run_prog import run_cmd
+from .run_cmd import run_cmd
 from .utils import filelist
 from .parse_iw import (parse_iw, parse_iwctl_show)
 from .phy_info import (IwPhyInfo, parse_iw_list)

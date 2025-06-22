@@ -4,7 +4,7 @@
 Deals with scanning wifi
 """
 import time
-from .run_prog import run_cmd
+from .run_cmd import run_cmd
 from .parse_iw_scan import parse_iw_scan
 from ._iw_hosts import IwHosts
 
