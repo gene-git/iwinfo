@@ -6,6 +6,8 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
+latex_engine = 'xelatex'
+
 project = "iwinfo"
 copyright = '2023, Gene C'
 author = 'Gene C'

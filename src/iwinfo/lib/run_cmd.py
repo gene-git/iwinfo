@@ -5,6 +5,7 @@ External program execution
 """
 from .run_prog import run_prog
 
+
 def run_cmd(pargs: list[str]) -> list[str]:
     """
     Run cmd with provided arguments and return stdout.

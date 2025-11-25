@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # SPDX-License-Identifier: MIT
 # SPDX-FileCopyrightText: © 2023-present  Gene C <arch@sapience.com>
 """
@@ -10,14 +11,14 @@ class IwPhyInfo:
     """
     Info about one phy
     """
-    def __init__(self, phy_name):
-        self.phy = phy_name
-        self.interface = None
-        self.addr = None
-        self.num_bands = 0
+    def __init__(self, phy_name: str):
+        self.phy: str = phy_name
+        self.interface: str = ''
+        self.addr: str = ''
+        self.num_bands: int = 0
         self.freq: list[str] = []
-        self.wifi_type = None
-        self.ieee_type = None
+        self.wifi_type: str = ''
+        self.ieee_type: str = ''
 
     def report(self):
         """ report what we found """
@@ -67,44 +68,69 @@ def parse_iw_list(iw_output: list[str]) -> dict[str, IwPhyInfo]:
 
         if row.startswith('Band '):
             phy.num_bands += 1
-            phy.wifi_type = 'wifi-1'
+            wifi_type = 'wifi-1'
 
-            phy.wifi_type = 'wifi-1'
-            phy.ieee_type = '802.11b'
+            wifi_type = 'wifi-1'
+            ieee_type = '802.11b'
 
             if phy.num_bands >= 2:
-                phy.wifi_type = 'wifi-3'
-                phy.ieee_type = '802.11g'
+                wifi_type = 'wifi-3'
+                ieee_type = '802.11g'
             elif phy.num_bands >= 3:
-                phy.wifi_type = 'wifi-6E'
-                phy.ieee_type = '802.11ax'
+                wifi_type = 'wifi-6E'
+                ieee_type = '802.11ax'
+
+            best_wifi = _best_wifi(phy.wifi_type, wifi_type)
+            if best_wifi == wifi_type:
+                phy.wifi_type = wifi_type
+                phy.ieee_type = ieee_type
             continue
 
         if '* 5180.0 MHz [36]' in row:
             phy.freq.append('5-GHz')
 
             if phy.num_bands == 1:
-                phy.wifi_type = 'wifi-2'
-                phy.ieee_type = '802.11a'
+                wifi_type = 'wifi-2'
+                ieee_type = '802.11a'
             else:
-                phy.wifi_type = 'wifi-4'
-                phy.ieee_type = '802.11n'
+                wifi_type = 'wifi-4'
+                ieee_type = '802.11n'
+
+            best_wifi = _best_wifi(phy.wifi_type, wifi_type)
+            if best_wifi == wifi_type:
+                phy.wifi_type = wifi_type
+                phy.ieee_type = ieee_type
             continue
 
         if 'HT Max' in row:
             # has 2 bands - no need to check
-            phy.wifi_type = 'wifi-4'
-            phy.ieee_type = '802.11n'
+            wifi_type = 'wifi-4'
+            ieee_type = '802.11n'
+
+            best_wifi = _best_wifi(phy.wifi_type, wifi_type)
+            if best_wifi == wifi_type:
+                phy.wifi_type = wifi_type
+                phy.ieee_type = ieee_type
             continue
 
         if 'VHT Capabilities' in row:
-            phy.wifi_type = 'wifi-5'
-            phy.ieee_type = '802.11ac'
+            wifi_type = 'wifi-5'
+            ieee_type = '802.11ac'
+
+            best_wifi = _best_wifi(phy.wifi_type, wifi_type)
+            if best_wifi == wifi_type:
+                phy.wifi_type = wifi_type
+                phy.ieee_type = ieee_type
             continue
 
         if 'HE RX MCS and NSS set <= 80 MHz' in row:
-            phy.wifi_type = 'wifi-6'
-            phy.ieee_type = '802.11ax'
+            wifi_type = 'wifi-6'
+            ieee_type = '802.11ax'
+
+            best_wifi = _best_wifi(phy.wifi_type, wifi_type)
+            if best_wifi == wifi_type:
+                phy.wifi_type = wifi_type
+                phy.ieee_type = ieee_type
             continue
 
         if '* 2412.0 MHz [1]' in row:
@@ -112,13 +138,33 @@ def parse_iw_list(iw_output: list[str]) -> dict[str, IwPhyInfo]:
             continue
 
         if '* 5955.0 MHz [1]' in row:
-            phy.wifi_type = 'wifi-6E'
-            phy.ieee_type = '802.11ax'
+            wifi_type = 'wifi-6E'
+            ieee_type = '802.11ax'
             phy.freq.append('6-GHz')
+
+            best_wifi = _best_wifi(phy.wifi_type, wifi_type)
+            if best_wifi == wifi_type:
+                phy.wifi_type = wifi_type
+                phy.ieee_type = ieee_type
             continue
 
-        if 'EHT ' in row:
-            phy.wifi_type = 'wifi-7'
-            phy.ieee_type = '802.11be'
+        if any(item in row for item in ('EHT MAC', 'EHT PHY')):
+            wifi_type = 'wifi-7'
+            ieee_type = '802.11be'
+            best_wifi = _best_wifi(phy.wifi_type, wifi_type)
+            if best_wifi == wifi_type:
+                phy.wifi_type = wifi_type
+                phy.ieee_type = ieee_type
             continue
+
     return phys
+
+
+def _best_wifi(wifi_1: str, wifi_2: str):
+    """
+    Return best of wifi_1 or wifi_2
+    e.g. wifi-6E > wifi-6
+    """
+    if wifi_1 > wifi_2:
+        return wifi_1
+    return wifi_2

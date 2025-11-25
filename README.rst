@@ -59,14 +59,23 @@ Key features
 New / Interesting
 ==================
 
- * Code now complies with: PEP-8, PEP-257, PEP-484 and PEP-561
- * Code Refactor & clean ups.
- * Wireless "host" database file name.
+**4.7.0**
 
-   Preferred name is now known-hosts.toml, which aligns better with it's purpose and format.
-   The previous names will continue to work just fine as well.
+* Bug fix: Scan occasionally gets device busy which is handled by a couple of retries.
+  However, when device is not responding at all this kept trying repeatedly. Fixed
 
-   The known host file will first be looked for in the directory *./etc/iwinfo/* and then */etc/iwinfo/*.
+* Bug fix: Misidentification of some phy(sical) (hardware) capabilities. Notably 802.11be (wifi-7)
+
+**Older**
+
+* Code now complies with: PEP-8, PEP-257, PEP-484 and PEP-561
+* Code Refactor & clean ups.
+* Wireless "host" database file name.
+
+  Preferred name is now known-hosts.toml, which aligns better with it's purpose and format.
+  The previous names will continue to work just fine as well.
+
+  The known host file will first be looked for in the directory *./etc/iwinfo/* and then */etc/iwinfo/*.
 
 
 ###############
@@ -209,10 +218,9 @@ Dependencies
 Philosophy
 ==========
 
-We follow the *live at head commit* philosophy. This means we recommend using the
-latest commit on git master branch. We also provide git tags. 
-
-This approach is also taken by Google [1]_ [2]_.
+We follow the *live at head commit* philosophy as recommended by
+Google's Abseil team [1]_.  This means we recommend using the
+latest commit on git master branch. 
 
 License
 =======
@@ -226,6 +234,5 @@ Created by Gene C. and licensed under the terms of the MIT license.
 .. _Github: https://github.com/gene-git/iwinfo
 .. _Archlinux AUR: https://aur.archlinux.org/packages/iwinfo
 
-.. [1] https://github.com/google/googletest  
-.. [2] https://abseil.io/about/philosophy#upgrade-support
+.. [1] https://abseil.io/about/philosophy#upgrade-support
 

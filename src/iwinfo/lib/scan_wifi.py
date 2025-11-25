@@ -19,6 +19,7 @@ def get_iw_scan(device_name: str, iw_hosts: IwHosts):
     count = 0
     naptime = 0.2
     while count < max_tries:
+        count += 1
         result = _iw_scan(device_name)
         if result:
             hosts = parse_iw_scan(result)
