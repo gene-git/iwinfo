@@ -6,12 +6,21 @@ Tags
 
 .. code-block:: text
 
-	2.0.1 (2024-04-13) -> 4.7.1 (2025-11-25)
-	61 commits.
+	2.0.1 (2024-04-13) -> 4.8.0 (2025-11-25)
+	63 commits.
 
 Commits
 =======
 
+
+* 2025-11-25  : **4.8.0**
+
+.. code-block:: text
+
+              - New option "-v" prints all frequencies supported by each phy
+                  mark any disabled channels, show if a channel is connect only using *no initiate radio*
+                  DFS channels may display *radar detected*
+              - update Docs/Changelog Docs/${my_name}.pdf
 
 * 2025-11-25  : **4.7.1**
 
