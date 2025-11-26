@@ -130,8 +130,8 @@ class IwInfo:
         if self.phys:
             print('\nDevices:')
             for (name, phy_info) in self.phys.items():
-                print(f'  {name}:')
-                phy_info.report()
+                print(f'  {name:>6s}:')
+                phy_info.report(verb=self.opts.verb)
 
         if self.do_scan:
             print('\nScanning network ...')

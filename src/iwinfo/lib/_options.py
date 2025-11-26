@@ -21,6 +21,7 @@ class Options:
         desc: str = "iwinfo : provide information about wireless network(s)"
         self.okay: bool = True
         self.scan: bool = False
+        self.verb: bool = False
 
         opts: list[Opt] = []
 
@@ -29,6 +30,13 @@ class Options:
         #
         opt = (('-s', '--scan'),
                {'help': 'Scan wireless network(s)',
+                'action': 'store_true',
+                }
+               )
+        opts.append(opt)
+
+        opt = (('-v', '--verb'),
+               {'help': 'Verbose: Report phy freq capabilities',
                 'action': 'store_true',
                 }
                )

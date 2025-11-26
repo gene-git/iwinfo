@@ -59,6 +59,16 @@ Key features
 New / Interesting
 ==================
 
+**4.8.0**
+
+* New verbose option *-v* reports all frequencies supported by each phy
+
+  This will also mark any disabled channels (restricted by reg domain). 
+  It will show if a channel is connect only using *no initiate radio*). 
+  i.e. any no initiate phy cannot be run as an Access Point.
+  DFS channels may display *radar detected*
+
+
 **4.7.0**
 
 * Bug fix: Scan occasionally gets device busy which is handled by a couple of retries.
