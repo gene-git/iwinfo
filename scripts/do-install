@@ -14,7 +14,7 @@ Docs="Docs"
 info="README.rst scripts packaging"
 infodir="/usr/share/${self}"
 
-license="Docs/License.rst"
+license="Docs/License/License.rst"
 licensedir="/usr/share/licenses/${self}"
 
 etc='/etc/iwinfo/'
@@ -22,12 +22,24 @@ confs='etc/wifi.db.sample'
 
 # list apps without the ".py" or leave empty string
 libexec=('iwinfo.py')
-apps_sdir='src/ambient'
-apps=('iwinfo')
+libexec_dir='/usr/lib/iwinfo'
+
+bin_apps=('iwinfo')
+bin_apps_sdir='src/ambient'
 
 # so can make app link in /usr/bin
 sitedir=$(/usr/bin/python3 -c "import site; print(site.getsitepackages()[0])")
 self_sitedir=${sitedir}/${self//-/_}
+installdir="${dest}${sitedir}"
+app_location="${sitedir}/iwinfo_mod/apps"
+
+uv_opts=(
+    --python /usr/bin/python
+    --system
+    --no-build-isolation
+    --link-mode=copy
+    --compile-bytecode
+)
 
 if [ ! -d "$dest" ] ; then
     echo 'Missing destination directory'
@@ -43,24 +55,24 @@ else
     chmod 755 ${dest}/${etc}
     /usr/bin/rsync -a --mkpath ${confs} ${dest}/${etc}/
 
-    /usr/bin/python -m installer --destdir="$dest" dist/*.whl
+    /usr/bin/uv pip install ${uv_opts[@]} --target "$installdir" dist/*.whl
+    /usr/bin/rm -rf "$installdir"/.lock
 
     # link(s) in /usr/lib/${self}/
     if [ -v libexec ] ; then
         /usr/bin/mkdir -p "${dest}/usr/lib/${self}"
         for app in ${libexec[@]}
         do
-            /usr/bin/ln -sf ${self_sitedir}/${app} ${dest}/usr/lib/${self}/${app}
+            /usr/bin/ln -sf ${app_location}/${app} ${dest}/${libexec_dir}/${app}
         done
     fi
-    if [ -v apps ] ; then
-        for app in ${apps[@]}
+    if [ -v bin_apps ] ; then
+        for bin_app in ${bin_apps[@]}
         do
-            rsync -a --mkpath ${apps_sdir}/$app ${dest}/usr/bin/$app
-            chmod 655 ${dest}/usr/bin/$app
+            rsync -a --mkpath ${bin_apps_sdir}/$bin_app ${dest}/usr/bin/$bin_app
+            chmod 655 ${dest}/usr/bin/$bin_app
         done
     fi
-
-    exit 0
 fi
+exit 0
 

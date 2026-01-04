@@ -5,7 +5,7 @@
 Report wireless network info
 """
 # pylint: disable=invalid-name
-from lib import IwInfo
+from iwinfo_mod.lib import IwInfo
 
 
 def main():

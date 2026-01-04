@@ -1,42 +1,46 @@
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["uv_build>=0.9.21,<=1.0.0"]
+build-backend = "uv_build"
 
 [project]
 name = "iwinfo"
-dynamic = ["version"]
 description = "iwinfo : Provides information about wireless network(s)"
 authors = [{ name = "Gene C", email = "arch@sapience.com" }]
-license = "MIT"
+license = "GPL-2.0-or-later"
 readme = "README.rst"
 keywords = []
 classifiers = [ 
     "Development Status :: 5 - Production/Stable",
     "Programming Language :: Python",
     "Programming Language :: C",
-    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.15",
 ]
+requires-python = ">=3.13"
+version = "5.0.0"
 dependencies = []
-[tool.hatch.build.targets.wheel]
-packages = ["src/iwinfo"]
-include = [
-    "src/iwinfo",
-]
-
 
 [project.urls]
-#Documentation = "https://github.com/gene-git/iwinfo/Docs"
-#Issues = "https://github.com/gene-git/iwinfo/issues"
-#Source = "https://github.com/gene-git/iwinfo"
+Documentation = "https://github.com/gene-git/iwinfo/Docs"
+Issues = "https://github.com/gene-git/iwinfo/issues"
+Source = "https://github.com/gene-git/iwinfo"
 
-[tool.hatch.version]
-path = "src/iwinfo/__about__.py"
-
-[[tool.hatch.envs.all.matrix]]
-python = ["3.12", "3.13", "3.14"]
+[tool.uv.build-backend]
+module-name = 'iwinfo_mod'
+module-root = "src"
+source-include = [
+    '/iwinfo_mod',
+    '/iwinfo_mod/py.typed',
+]
+source-exclude = [
+    ".pytest_cache",
+    "__pycache__",
+    ".mypy_cache",
+]
 
 [tool.mypy]
 check_untyped_defs = true
 follow_untyped_imports = true
-mypy_path = "src/iwinfo/stubs"
+mypy_path = "src/stubs"
 
