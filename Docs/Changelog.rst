@@ -6,24 +6,30 @@ Tags
 
 .. code-block:: text
 
-	2.0.1 (2024-04-13) -> HEAD (2026-01-04)
-	65 commits.
+	2.0.1 (2024-04-13) -> 5.0.1 (2026-01-06)
+	67 commits.
 
 Commits
 =======
 
 
-* 2026-01-04  : **HEAD**
+* 2026-01-06  : **5.0.1**
 
 .. code-block:: text
 
+              - PKGBUILD small change
+ 2026-01-04   ⋯
+
+.. code-block:: text
+
+              - update Docs/Changelog
               - **5.0.0**
             
                 * Reorg source a little
                 * Switch python packaging from hatch to uv
                 * License GPL-2.0-or-later
 
-* 2025-11-25  : **5.0.0, origin/master**
+* 2025-11-25  : **5.0.0**
 
 .. code-block:: text
 
