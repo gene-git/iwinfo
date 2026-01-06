@@ -11,7 +11,7 @@ latex_engine = 'xelatex'
 project = "iwinfo"
 copyright = '2023, Gene C'
 author = 'Gene C'
-release = "5.0.0"
+release = "5.0.1"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
