@@ -1,11 +1,14 @@
 -------------------------------------------------------
  Changelog    : iwinfo
- Tags         : 4.7.1 ➙ 5.1.0
+ Tags         : 4.8.0 ➙ 5.1.1
               : 2025-11-25 ➙ 2026-09-04
               : 6 tags. See Docs for full changelog
 -------------------------------------------------------
 
- 2026-09-04   : 5.1.0
+ 2026-09-04   : 5.1.1
+              - Add meson files to repo
+
+ 2026-09-04   : 5.1.0, origin/master
               - **5.1.0**
             
                 * Meson / meson-python for build and package management
@@ -36,12 +39,4 @@
               - New option "-v" prints all frequencies supported by each phy
                   mark any disabled channels, show if a channel is connect only using *no initiate radio*
                   DFS channels may display *radar detected*
-              - update Docs/Changelog Docs/${my_name}.pdf
-
- 2025-11-25   : 4.7.1
-              - * Bug fix: Scan occasionally gets device busy which is handled by a couple of retries.
-                  However, when device is not responding at all this kept trying repeatedly. Fixed
-            
-                * Bug fix: Misidentification of some phy(sical) (hardware) capabilities. Notably 802.11be (wifi-7)
- 2025-06-26   ⋯
               - update Docs/Changelog Docs/${my_name}.pdf

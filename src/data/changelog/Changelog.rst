@@ -6,14 +6,20 @@ Tags
 
 .. code-block:: text
 
-	2.0.1 (2024-04-13) -> 5.1.0 (2026-09-04)
-	69 commits.
+	2.0.1 (2024-04-13) -> 5.1.1 (2026-09-04)
+	70 commits.
 
 Commits
 =======
 
 
-* 2026-09-04  : **5.1.0**
+* 2026-09-04  : **5.1.1**
+
+.. code-block:: text
+
+              - Add meson files to repo
+
+* 2026-09-04  : **5.1.0, origin/master**
 
 .. code-block:: text
 
