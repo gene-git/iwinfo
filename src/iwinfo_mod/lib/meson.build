@@ -1,0 +1,20 @@
+py.install_sources(
+     'class_iwinfo.py',
+     '_device_base.py',
+     '_device.py',
+     '__init__.py',
+     '_iw_host.py',
+     '_iw_hosts.py',
+     '_known_hosts.py',
+     '_options.py',
+     'our_wifi.py',
+     'parse_iw.py',
+     'parse_iw_scan.py',
+     'parse_tools.py',
+     'phy_info.py',
+     'run_cmd.py',
+     'scan_wifi.py',
+     'utils.py',
+     'version.py',
+  subdir: 'iwinfo_mod/lib'
+)

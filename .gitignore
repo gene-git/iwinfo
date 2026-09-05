@@ -1,0 +1,5 @@
+build/
+__pycache__/
+.mypy_cache/
+src/data/docs/_build/
+

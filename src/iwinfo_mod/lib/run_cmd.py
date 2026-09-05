@@ -3,7 +3,32 @@
 """
 External program execution
 """
-from .run_prog import run_prog
+# pylint: disable=too-few-public-methods
+from pyconcurrent import run_prog
+
+
+class Command:
+    """
+    Run program and any track errors.
+    """
+    def __init__(self):
+        self.ret: int = 0
+        self.err: str = ''
+
+    def run(self, pargs: list[str]) -> list[str]:
+        """
+        Run program and args in pargs.
+
+        :paraam pargs: List of program and arguments.
+        :returns: List of lines output by the program
+                  self.ret is set to exit status
+                  self.err holds the stderr from the program
+        """
+        result: list[str] = []
+        (self.ret, out, self.err) = run_prog(pargs)
+        if out:
+            result = out.splitlines()
+        return result
 
 
 def run_cmd(pargs: list[str]) -> list[str]:
@@ -11,22 +36,13 @@ def run_cmd(pargs: list[str]) -> list[str]:
     Run cmd with provided arguments and return stdout.
 
     Variation of run_prog with simpler calling convention.
-    Args:
-        pargs (list[str]):
-        Standard list of command and arguments.
-    Returns:
-        list[str]:
-        list of lines of stdout from running program.
-        May be empty list.
-
+    :param pargs: Standard list of command and arguments.
+    :returns: list of lines of stdout from running program.
+              May be empty list.
     """
-    result: list[str] = []
-
-    (ret, out, err) = run_prog(pargs)
-    if ret != 0:
-        if err:
-            print(err)
-        return result
-    if out:
-        result = out.splitlines()
+    command = Command()
+    result = command.run(pargs)
+    if command.ret != 0:
+        if command.err:
+            print(command.err)
     return result

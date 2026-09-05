@@ -22,7 +22,7 @@ from .our_wifi import (get_phy_list, get_device_names)
 from .phy_info import IwPhyInfo
 from ._iw_hosts import IwHosts
 from .scan_wifi import get_iw_scan
-from .capabilities import have_net_caps
+# from .capabilities import have_net_caps
 from ._known_hosts import KnownHosts
 from ._options import Options
 from ._device import Device
@@ -38,9 +38,6 @@ class IwInfo:
     We also use iwctl when available for additional information.
     """
     def __init__(self):
-        self.have_caps: bool = False
-        self.do_scan: bool = False
-
         # local devices
         self.device_names: list[str] = []
         self.devices: dict[str, Device] = {}
@@ -58,21 +55,6 @@ class IwInfo:
         # command line
         self.opts = Options()
 
-        if self.opts.scan:
-            self._scan_permissions_check()
-
-    def _scan_permissions_check(self):
-        """
-        Scan wireless network(s)
-           NB: Caps required
-               Require: cap_net_raw, cap_net_admin
-        """
-        self.have_caps = have_net_caps()
-        if self.have_caps:
-            self.do_scan = True
-        else:
-            print('Skipping scan which requires elevated privileges')
-
     def get_our_wifi_info(self):
         """
         Get info about all local wifi devices
@@ -84,7 +66,7 @@ class IwInfo:
                 self.devices[name] = Device(name)
                 self.devices[name].get_info()
 
-                if self.do_scan:
+                if self.opts.scan:
                     self.iw_hosts[name] = IwHosts(name)
 
         # update ap bssid list
@@ -98,10 +80,9 @@ class IwInfo:
         Scan network :
          - need privs to put devices into promiscuous mode
          - need cap_net_raw, cap_net_admin
+         - go ahead and try - if not permitted warning is printed
+           and we get nothing back.
         """
-        if not self.have_caps:
-            print('Scan requires elevated privileges')
-            return
         for dev in self.device_names:
             get_iw_scan(dev, self.iw_hosts[dev])
 
@@ -133,9 +114,10 @@ class IwInfo:
                 print(f'  {name:>6s}:')
                 phy_info.report(verb=self.opts.verb)
 
-        if self.do_scan:
+        if self.opts.scan:
             print('\nScanning network ...')
             self.scan()
             for (dev, iw_hosts) in self.iw_hosts.items():
-                print(f'  {dev}:')
-                iw_hosts.report(self.ap_bssids, known_hosts)
+                if iw_hosts.scan_items:
+                    print(f'  {dev}:')
+                    iw_hosts.report(self.ap_bssids, known_hosts)

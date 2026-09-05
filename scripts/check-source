@@ -5,10 +5,11 @@
 # Run in top dir in which "src" is found
 # 
 # 
-
 mod_dir='src/iwinfo_mod'
 PYTHONPATH=src pylint $mod_dir/*y $mod_dir/*/*py
 PYTHONPATH=src pycodestyle --max-line-length=110 $mod_dir/*y $mod_dir/*/*py
 mypy --check-untyped-defs --follow-untyped-imports $mod_dir
+
+/usr/bin/clang-tidy -p build/release src/iwinfo/*.[ch]
 
 

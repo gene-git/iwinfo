@@ -56,7 +56,10 @@ class Options:
         #
         # store result as attribute
         #
+        known_keys = ('scan', 'verb')
         parsed = par.parse_args()
         if parsed:
             for (key, val) in vars(parsed).items():
+                if key not in known_keys:
+                    continue
                 setattr(self, key, val)

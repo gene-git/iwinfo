@@ -3,76 +3,18 @@
 # Copyright (c) 2023 Gene C
 #
 # installer script for iwinfo
-# e.g. Call from PKGBUILD:  
-#   ./do-install ${pkgdir}
-# gene c
+#   ./do-install ${destination-directory}
 #
-dest="$1"
-self='iwinfo'
 
-Docs="Docs"
-info="README.rst scripts packaging"
-infodir="/usr/share/${self}"
-
-license="Docs/License/License.rst"
-licensedir="/usr/share/licenses/${self}"
-
-etc='/etc/iwinfo/'
-confs='etc/wifi.db.sample'
-
-# list apps without the ".py" or leave empty string
-libexec=('iwinfo.py')
-libexec_dir='/usr/lib/iwinfo'
-
-bin_apps=('iwinfo')
-bin_apps_sdir='src/ambient'
-
-# so can make app link in /usr/bin
-sitedir=$(/usr/bin/python3 -c "import site; print(site.getsitepackages()[0])")
-self_sitedir=${sitedir}/${self//-/_}
-installdir="${dest}${sitedir}"
-app_location="${sitedir}/iwinfo_mod/apps"
-
-uv_opts=(
-    --python /usr/bin/python
-    --system
-    --no-build-isolation
-    --link-mode=copy
-    --compile-bytecode
-)
-
-if [ ! -d "$dest" ] ; then
-    echo 'Missing destination directory'
-    exit 1
+if (( $# < 1 )) ; then
+    dest='build/pkg'
 else
-    # shared
-    /usr/bin/rsync --mkpath -a ${Docs} ${dest}/${infodir}/
-    /usr/bin/rsync --mkpath -a ${info} ${dest}${infodir}
-    /usr/bin/rsync --mkpath -a ${license} ${dest}/${licensedir}/
-
-    # /etc/iwinfo must be readable by non-priv user
-    mkdir -p ${dest}/${etc}
-    chmod 755 ${dest}/${etc}
-    /usr/bin/rsync -a --mkpath ${confs} ${dest}/${etc}/
-
-    /usr/bin/uv pip install ${uv_opts[@]} --target "$installdir" dist/*.whl
-    /usr/bin/rm -rf "$installdir"/.lock
-
-    # link(s) in /usr/lib/${self}/
-    if [ -v libexec ] ; then
-        /usr/bin/mkdir -p "${dest}/usr/lib/${self}"
-        for app in ${libexec[@]}
-        do
-            /usr/bin/ln -sf ${app_location}/${app} ${dest}/${libexec_dir}/${app}
-        done
-    fi
-    if [ -v bin_apps ] ; then
-        for bin_app in ${bin_apps[@]}
-        do
-            rsync -a --mkpath ${bin_apps_sdir}/$bin_app ${dest}/usr/bin/$bin_app
-            chmod 655 ${dest}/usr/bin/$bin_app
-        done
-    fi
+    dest="$1"
 fi
+
+dest=$(realpath "$dest")
+
+/usr/bin/meson install -C build/release --destdir "$dest" > /dev/null
+
 exit 0
 
