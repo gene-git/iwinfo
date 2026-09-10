@@ -5,6 +5,7 @@
 # installer script for iwinfo
 #   ./do-install ${destination-directory}
 #
+set -euo pipefail
 
 if (( $# < 1 )) ; then
     dest='build/pkg'

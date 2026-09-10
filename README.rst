@@ -59,16 +59,11 @@ Key features
 Recent Changes
 ==============
 
-**5.1.0**
+**5.1.2**
 
-* Meson / meson-python for build and package management
-* Simplify python code.
-  New dependency:  pyconcurrent package
-* Improve iwinfo.
-  C-program which runs the application and if permitted (root or wheel)
-  gives the application the approrpriate network capabilties to scan.
-  The information other than scanning the network is available to
-  unprivileged users. 
+* Change Arch package dependencies that have been renamed:
+
+  - pyconcurrent -> python-pyconcurrent
 
 ===============
 Getting Started

@@ -6,20 +6,30 @@ Tags
 
 .. code-block:: text
 
-	2.0.1 (2024-04-13) -> 5.1.1 (2026-09-04)
-	70 commits.
+	2.0.1 (2024-04-13) -> 5.1.2 (2026-09-09)
+	71 commits.
 
 Commits
 =======
 
 
-* 2026-09-04  : **5.1.1**
+* 2026-09-09  : **5.1.2**
+
+.. code-block:: text
+
+              - **5.1.2**
+            
+                * Change Arch package dependencies that have been renamed:
+            
+                  - pyconcurrent -> python-pyconcurrent
+
+* 2026-09-04  : **5.1.1, origin/master**
 
 .. code-block:: text
 
               - Add meson files to repo
 
-* 2026-09-04  : **5.1.0, origin/master**
+* 2026-09-04  : **5.1.0**
 
 .. code-block:: text
 
